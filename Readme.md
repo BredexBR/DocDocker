@@ -122,3 +122,13 @@ docker container inspect nome-ou-id-do-container
 ```
 
 Esse comando é útil para diagnosticar problemas, verificar configurações ou obter informações detalhadas sobre o contêiner em execução.
+
+## Executar um Contêiner com Volume Montado
+
+O comando abaixo cria e executa um contêiner chamado `teste-volume` utilizando a imagem `alpine`. Ele monta um volume local na pasta `/home/user/bkp/` do host dentro do contêiner, no caminho `/bkp`. 
+
+```bash
+docker container run -v /home/user/bkp/:/bkp/ --name teste-volume -it alpine sh
+```
+
+- `-v /home/adriano/bkp/:/bkp/` Monta o diretório local /home/adriano/bkp/ no caminho /bkp dentro do contêiner, permitindo acesso e manipulação dos arquivos no host.
