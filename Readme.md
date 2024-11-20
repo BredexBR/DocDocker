@@ -61,6 +61,19 @@ Para forçar o encerramento imediatamente, você pode usar o comando:
 docker container kill nome-ou-id-do-conteiner
 ```
 
+## Iniciar um Contêiner Parado
+
+O comando abaixo é usado para iniciar um contêiner que foi previamente criado ou parado. Você pode utilizar o nome ou o ID do contêiner para identificá-lo.
+
+```bash
+docker container start nome-ou-id-do-conteiner
+```
+
+- `start` Inicia um contêiner que está parado.
+- `nome-ou-id-do-conteiner` Substitua pelo nome ou ID do contêiner que deseja iniciar.
+
+Esse comando é útil quando você precisa reiniciar rapidamente um contêiner sem criar um novo.
+
 ## Remover um Contêiner
 
 O comando `docker container rm` é usado para remover um contêiner que já foi parado. É útil para manter o ambiente limpo, excluindo contêineres que não são mais necessários.
@@ -131,4 +144,44 @@ O comando abaixo cria e executa um contêiner chamado `teste-volume` utilizando 
 docker container run -v /home/user/bkp/:/bkp/ --name teste-volume -it alpine sh
 ```
 
-- `-v /home/adriano/bkp/:/bkp/` Monta o diretório local /home/adriano/bkp/ no caminho /bkp dentro do contêiner, permitindo acesso e manipulação dos arquivos no host.
+- `-v /home/user/bkp/:/bkp/` Monta o diretório local /home/user/bkp/ no caminho /bkp dentro do contêiner, permitindo acesso e manipulação dos arquivos no host.
+
+## Executar um Contêiner com Nginx e Mapeando Rotas
+
+O comando abaixo cria e executa um contêiner chamado `nginx` utilizando a imagem oficial `nginx`. O contêiner será executado em segundo plano e a porta 80 do host será mapeada para a porta 80 do contêiner.
+
+```bash
+docker container run -d -p 80:80 --name nginx nginx
+```
+
+- `-d` Faz o contêiner ser executado em segundo plano (modo detached).
+- `-p 80:80` Mapeia a porta 80 do host para a porta 80 do contêiner, permitindo acessar o servidor web Nginx pelo endereço do host.
+- `--name nginx` Define o nome do contêiner como nginx para facilitar sua identificação.
+- `nginx` Especifica a imagem utilizada para criar o contêiner, que neste caso é a imagem oficial do Nginx.
+
+## Visualizar Logs de um Contêiner
+
+O comando abaixo exibe os logs do contêiner chamado `nginx`. Isso é útil para verificar mensagens de erro, saídas padrão ou qualquer registro gerado pelo contêiner.
+
+```bash
+docker container logs nginx
+```
+
+- `logs` Mostra os logs do contêiner especificado.
+- `nginx` Nome do contêiner cujos logs serão exibidos.
+
+Você pode usar esse comando para monitorar o comportamento do contêiner e depurar possíveis problemas.
+
+## Criar uma Nova Imagem a Partir de um Contêiner
+
+O comando abaixo cria uma nova imagem a partir de um contêiner existente chamado `nginx-name`. A imagem gerada será nomeada como `nginx-name-img`.
+
+```bash
+docker container commit nginx-name nginx-name-img
+```
+
+- `commit` Cria uma nova imagem com base no estado atual de um contêiner.
+- `nginx-name` Nome ou ID do contêiner que será usado como base para criar a nova imagem.
+- `nginx-name-img` Nome atribuído à nova imagem gerada.
+
+Esse comando é útil quando você deseja salvar as alterações feitas em um contêiner como uma nova imagem reutilizável.
