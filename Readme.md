@@ -229,3 +229,109 @@ docker container run -it --rm --name nginx-name nginx-name-img sh
 - `sh` Executa o shell dentro do contêiner.
 
 Esse comando é útil para testes rápidos, já que o contêiner será apagado automaticamente após o uso.
+
+## Ver Histórico de Modificações de uma Imagem
+
+O comando abaixo exibe o histórico de camadas e modificações realizadas na construção da imagem `image-name`.
+
+```bash
+docker image history image-name
+```
+
+- `image` Especifica que o comando é para manipulação de imagens.
+- `history` Mostra as camadas de construção de uma imagem Docker.
+- `image-name` Nome da imagem cuja história será exibida.
+
+Esse comando é útil para verificar as etapas realizadas durante a criação da imagem, como comandos executados, alterações de arquivos e outras configurações.
+
+## Exportar o Sistema de Arquivos de um Contêiner
+
+O comando abaixo exporta o sistema de arquivos do contêiner `teste-export` e salva em um arquivo compactado no formato `.tar`.
+
+```bash
+docker container export teste-export -o teste-export.tar
+```
+
+- `container` Especifica que o comando está relacionado a contêineres.
+- `export` Exporta o sistema de arquivos de um contêiner em execução ou parado.
+- `teste-export` Nome ou ID do contêiner a ser exportado.
+- `-o teste-export.tar` Define o nome do arquivo de saída, neste caso, teste-export.tar.
+
+Este comando é útil para criar um backup do sistema de arquivos de um contêiner ou para transferir o sistema de arquivos para outra máquina.
+
+## Importar uma Imagem a Partir de um Arquivo TAR
+
+O comando abaixo importa o sistema de arquivos exportado (arquivo `.tar`) como uma nova imagem Docker.
+
+```bash
+docker image import teste-export.tar ubuntu-importado
+```
+
+- `image` Indica que o comando está relacionado a imagens Docker.
+- `import` Importa o conteúdo de um arquivo .tar como uma imagem Docker.
+- `teste-export.tar` Nome do arquivo que contém o sistema de arquivos exportado.
+- `ubuntu-importado` Nome da nova imagem Docker criada a partir do arquivo.
+
+Este comando é útil quando você exporta o sistema de arquivos de um contêiner e deseja utilizá-lo para criar uma nova imagem Docker. Você pode, por exemplo, reutilizar a imagem em outro ambiente.
+
+## Remover Imagens Não Utilizadas
+
+O comando abaixo remove todas as imagens de contêineres que não estão mais sendo utilizadas no Docker, ajudando a liberar espaço em disco.
+
+```bash
+docker image prune
+```
+
+- `image` Indica que o comando é relacionado a imagens Docker.
+- `prune` Remove recursos que não estão mais em uso, neste caso, imagens órfãs (dangling images), que não possuem tag ou associação com contêineres.
+
+Este comando é útil para manter o ambiente de Docker limpo, evitando o acúmulo de imagens desnecessárias. Caso deseje evitar a confirmação manual, você pode utilizar a flag -f
+
+### Observação
+Este comando não remove imagens em uso. Para limpar todas as imagens não utilizadas, incluindo as associadas a contêineres parados, use o comando:
+
+```bash
+docker system prune.
+```
+
+## Baixar uma Imagem do Docker Hub
+
+O comando abaixo baixa a imagem oficial `alpine` do Docker Hub para o seu ambiente local.
+
+```bash
+docker image pull alpine
+```
+
+- `image` Indica que o comando é relacionado a imagens Docker.
+- `pull` Faz o download de uma imagem do repositório oficial do Docker Hub.
+- `alpine` Nome da imagem que será baixada. Neste caso, a imagem alpine, conhecida por ser leve e otimizada para contêineres.
+
+Este comando é útil para garantir que a imagem necessária esteja disponível localmente antes de iniciar a criação de contêineres baseados nela. Caso você não especifique uma tag, a versão mais recente da imagem será baixada por padrão.
+
+## Taggear e Enviar uma Imagem para um Registro
+
+Os comandos abaixo são usados para adicionar uma nova tag a uma imagem local e enviá-la para um registro Docker (como o Docker Hub).
+
+### Adicionar uma Tag à Imagem
+
+```bash
+docker image tag ubuntu repositório/meu-ubuntu:1
+```
+
+- `image tag` Adiciona uma nova tag a uma imagem existente.
+- `ubuntu` Nome da imagem local que será taggeada.
+- `repositório/meu-ubuntu:1` Novo nome e tag da imagem. O prefixo repositório/ geralmente indica o repositório do Docker Hub.
+
+Este comando é útil para preparar uma imagem com um nome e tag específicos antes de enviá-la a um registro.
+
+### Enviar a Imagem para um Registro
+
+```bash
+docker image push repositório/meu-ubuntu:1
+```
+
+- `image push` Envia a imagem especificada para o registro configurado (por exemplo, Docker Hub).
+- `repositório/meu-ubuntu:1` Nome e tag da imagem que será enviada.
+
+Certifique-se de estar autenticado no registro antes de executar este comando. Use docker login para fazer login no Docker Hub ou outro registro.
+
