@@ -335,3 +335,53 @@ docker image push repositório/meu-ubuntu:1
 
 Certifique-se de estar autenticado no registro antes de executar este comando. Use docker login para fazer login no Docker Hub ou outro registro.
 
+## Criar uma Imagem Docker com o Editor Vim
+
+O trecho abaixo configura uma imagem Docker baseada na distribuição **Ubuntu** e instala o editor de texto **Vim**.
+
+### Código
+
+```dockerfile
+FROM ubuntu
+RUN apt-get update && apt-get -y install vim
+```
+
+### Explicação
+- `FROM ubuntu` <br>
+  Define a base da imagem como Ubuntu. Todas as instruções subsequentes serão executadas a partir dessa base.
+
+- `RUN apt-get update && apt-get -y install vim` <br>
+Atualiza a lista de pacotes disponíveis e instala o editor de texto Vim.
+  - `apt-get update` Atualiza o índice de pacotes no sistema.
+  - `apt-get -y install vim` Instala o Vim, com a flag -y para responder automaticamente "sim" a prompts de confirmação.
+
+### Utilidade
+Este Dockerfile é útil para criar uma imagem Docker que já vem com o Vim instalado, facilitando o uso em contêineres onde você deseja editar arquivos diretamente.
+
+## Construir uma Imagem Docker a Partir de um Dockerfile
+
+O comando abaixo é usado para criar uma nova imagem Docker com base nas instruções definidas em um **Dockerfile**.
+
+```bash
+docker image build -t meu-ubuntu .
+```
+
+- `docker image build` Inicia o processo de construção de uma imagem Docker.
+
+- `-t meu-ubuntu` Define a tag da imagem como meu-ubuntu. A tag ajuda a identificar a imagem.
+
+- `.` Especifica o diretório atual como o local onde está o Dockerfile.
+
+Este comando é usado para criar uma nova imagem personalizada. Após executar o comando, a imagem chamada meu-ubuntu estará disponível localmente no ambiente Docker, pronta para ser usada para criar contêineres.
+
+### Construir uma Imagem Docker Sem Usar Cache
+
+O comando abaixo é usado para criar uma imagem Docker sem aproveitar o cache das etapas de construção anteriores.
+
+```bash
+docker image build --no-cache -t meu-ubuntu .
+```
+
+- A unica diferença é acrescentar o trecho `--no-cache` indicando que nenhuma etapa de cache deve ser usada durante a construção da imagem, garantindo que todas as instruções do Dockerfile sejam executadas do zero.
+
+Este comando é útil para garantir que a imagem seja construída com as atualizações mais recentes, evitando problemas causados por versões desatualizadas que podem estar armazenadas no cache.
