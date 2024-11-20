@@ -185,3 +185,47 @@ docker container commit nginx-name nginx-name-img
 - `nginx-name-img` Nome atribuído à nova imagem gerada.
 
 Esse comando é útil quando você deseja salvar as alterações feitas em um contêiner como uma nova imagem reutilizável.
+
+## Exportar uma Imagem Docker para um Arquivo
+
+O comando abaixo salva a imagem `nginx-name-img` em um arquivo chamado `nginx-name.tar`. Esse arquivo pode ser usado para transferir ou armazenar a imagem.
+
+```bash
+docker image save -o nginx-name.tar nginx-name-img
+```
+
+- `save` Exporta uma imagem Docker para um arquivo no formato TAR.
+- `-o nginx-name.tar` Especifica o nome do arquivo de saída onde a imagem será salva.
+- `nginx-name-img` Nome da imagem Docker que será exportada.
+
+Esse comando é útil para compartilhar imagens Docker entre sistemas ou para backup.
+
+## Importar uma Imagem Docker de um Arquivo
+
+O comando abaixo importa uma imagem Docker a partir de um arquivo chamado `nginx-name.tar`. Isso recria a imagem no ambiente Docker local.
+
+```bash
+docker image load -i nginx-name.tar
+```
+
+- `load` Importa uma imagem Docker de um arquivo no formato TAR.
+- `-i nginx-name.tar` Especifica o arquivo de entrada contendo a imagem exportada.
+
+Esse comando é útil para restaurar imagens salvas ou transferidas de outro sistema.
+
+## Executar um Contêiner Interativo e Removível
+
+O comando abaixo executa um contêiner chamado `nginx-name` utilizando a imagem `nginx-name-img`. O contêiner é iniciado em modo interativo, e será automaticamente removido ao ser parado.
+
+```bash
+docker container run -it --rm --name nginx-name nginx-name-img sh
+```
+
+- `run` Inicia um novo contêiner.
+- `-it` Permite interação com o terminal do contêiner (modo interativo).
+- `--rm` Remove o contêiner automaticamente ao ser encerrado.
+- `--name nginx-name` Define o nome do contêiner como nginx-name.
+- `nginx-name-img` Nome da imagem utilizada para criar o contêiner.
+- `sh` Executa o shell dentro do contêiner.
+
+Esse comando é útil para testes rápidos, já que o contêiner será apagado automaticamente após o uso.
