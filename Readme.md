@@ -431,3 +431,63 @@ docker image build --no-cache -t meu-ubuntu .
 - A unica diferença é acrescentar o trecho `--no-cache` indicando que nenhuma etapa de cache deve ser usada durante a construção da imagem, garantindo que todas as instruções do Dockerfile sejam executadas do zero.
 
 Este comando é útil para garantir que a imagem seja construída com as atualizações mais recentes, evitando problemas causados por versões desatualizadas que podem estar armazenadas no cache.
+
+## Verificar o Uso de Espaço do Docker
+
+O comando abaixo exibe o uso de espaço em disco por imagens, contêineres, volumes e cache do Docker.
+
+```bash
+docker system df
+```
+
+- Mostra um resumo do espaço em disco utilizado pelos recursos do Docker, incluindo:
+  - `Images:` Espaço ocupado por imagens armazenadas localmente.
+  - `Containers:` Espaço ocupado por contêineres, incluindo os finalizados.
+  - `Volumes:` Espaço utilizado por volumes.
+  - `Build Cache:` Espaço ocupado pelo cache de construção de imagens.
+
+Este comando é útil para gerenciar o uso de disco no ambiente Docker, identificando recursos que ocupam espaço desnecessário. Também auxilia na manutenção do sistema, permitindo a remoção de imagens, contêineres e volumes não utilizados.
+
+## Obter Informações do Sistema Docker
+
+O comando abaixo exibe informações detalhadas sobre a instalação do Docker, incluindo configurações e status.
+
+```bash
+docker system info
+```
+
+Fornece um resumo abrangente sobre o ambiente Docker, incluindo:
+  - `Versão do Docker:` Mostra a versão instalada.
+  - `Plataforma:` Informações sobre o sistema operacional e arquitetura.
+  - `Drivers:` Detalhes sobre drivers de armazenamento e rede.
+  - `Contêineres e Imagens:` Quantidade de contêineres e imagens em uso.
+  - `Plugins:` Plugins de armazenamento, rede, entre outros, configurados no Docker.
+  - `Recursos:` Limites de CPU e memória disponíveis para o Docker.
+
+Este comando é essencial para diagnosticar e entender o estado do ambiente Docker. Ele fornece detalhes importantes para resolução de problemas e para configurar corretamente o sistema.
+
+## Limpar Recursos Não Utilizados no Docker
+
+O comando abaixo remove todos os recursos não utilizados no Docker, incluindo contêineres parados, imagens sem referência, volumes e redes não utilizados.
+
+```bash
+docker system prune
+```
+
+Remove todos os recursos que não estão mais em uso, como:
+  - `Contêineres parados:` Contêineres que não estão em execução.
+  - `Imagens dangling:` Imagens sem tags ou sem referência.
+  - `Volumes não utilizados:` Volumes não conectados a nenhum contêiner.
+  - `Redes não utilizadas:` Redes que não estão associadas a nenhum contêiner.
+
+Opções adicionais:
+  - `-f` ou `--force` Executa a limpeza sem solicitar confirmação.
+  - `--volumes` Inclui volumes na limpeza (não são removidos por padrão).
+
+Este comando é útil para liberar espaço em disco e manter o ambiente Docker organizado, removendo recursos desnecessários que não estão mais sendo utilizados.
+
+
+
+
+
+
