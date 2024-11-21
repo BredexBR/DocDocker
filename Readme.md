@@ -146,6 +146,52 @@ docker container run -v /home/user/bkp/:/bkp/ --name teste-volume -it alpine sh
 
 - `-v /home/user/bkp/:/bkp/` Monta o diretório local /home/user/bkp/ no caminho /bkp dentro do contêiner, permitindo acesso e manipulação dos arquivos no host.
 
+### Volume Montado e Compartilhado com o Host
+
+```bash
+docker run -it --name alpine-docker -v /data alpine sh
+```
+
+- `docker run` Inicia um novo contêiner com base na imagem especificada.
+
+- `-it`
+  - `-i` Mantém o contêiner interativo, permitindo entrada de comandos.
+  - `-t` Anexa um terminal ao contêiner.
+
+- `--name alpine-docker` Define o nome do contêiner como alpine-docker para facilitar sua identificação.
+
+- `-v /data` Monta um volume no contêiner no diretório /data. O volume permite persistência e compartilhamento de dados entre o host e o contêiner.
+
+- `alpine` Especifica a imagem base para o contêiner. Neste caso, a imagem Alpine, uma distribuição Linux minimalista.
+
+- `sh` Especifica o comando a ser executado dentro do contêiner, neste caso, o shell sh.
+
+Este comando é útil para criar contêineres com interação direta via terminal, além de permitir que dados sejam persistidos ou compartilhados com o sistema host através do volume montado.
+
+### Volume Nomeado
+
+O comando abaixo cria e executa um contêiner baseado na imagem **Alpine**, utilizando um volume nomeado para persistência de dados.
+
+```bash
+docker run -it --name alpine-docker -v teste-volume:/data alpine sh
+```
+
+- `-v teste-volume:/data` Monta um volume nomeado, chamado teste-volume, no diretório /data dentro do contêiner.
+
+Este comando é útil para criar um contêiner que utiliza volumes nomeados. Esses volumes são gerenciados diretamente pelo Docker, permitindo persistência de dados e maior organização no uso de múltiplos contêineres.
+
+## Remover um Volume Docker
+
+O comando abaixo é usado para excluir um volume específico no Docker.
+
+```bash
+docker volume rm teste-volume
+```
+
+- `docker volume rm` Remove um volume gerenciado pelo Docker.
+
+- `teste-volume` Nome do volume que será excluído.
+
 ## Executar um Contêiner com Nginx e Mapeando Rotas
 
 O comando abaixo cria e executa um contêiner chamado `nginx` utilizando a imagem oficial `nginx`. O contêiner será executado em segundo plano e a porta 80 do host será mapeada para a porta 80 do contêiner.
