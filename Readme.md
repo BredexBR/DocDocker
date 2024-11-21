@@ -9,6 +9,49 @@ Neste guia, você encontrará: <br>
 - Gerenciamento de contêineres, imagens e volumes.
 - Exemplos práticos e explicações claras para facilitar o aprendizado.
 
+# Índice
+
+1. [Listar Contêineres](#listar-contêineres)
+2. [Criar um Contêiner](#criar-um-contêiner)
+3. [Conectar-se a um Contêiner em Execução](#conectar-se-a-um-contêiner-em-execução)
+4. [Parar a Execução de um Contêiner](#parar-a-execução-de-um-contêiner)
+5. [Iniciar um Contêiner Parado](#iniciar-um-contêiner-parado)
+6. [Remover um Contêiner](#remover-um-contêiner)
+7. [Renomear um Contêiner](#renomear-um-contêiner)
+8. [Executar Comandos em um Contêiner em Execução](#executar-comandos-em-um-contêiner-em-execução)
+9. [Desconectar de um Contêiner Sem Parar sua Execução](#desconectar-de-um-contêiner-sem-parar-sua-execução)
+   - [Como reconectar ao contêiner](#como-reconectar-ao-contêiner)
+10. [Obter Informações Detalhadas de um Contêiner](#obter-informações-detalhadas-de-um-contêiner)
+11. [Executar um Contêiner com Volume Montado](#executar-um-contêiner-com-volume-montado)
+    - [Volume Montado e Compartilhado com o Host](#volume-montado-e-compartilhado-com-o-host)
+    - [Volume Nomeado](#volume-nomeado)
+12. [Remover um Volume Docker](#remover-um-volume-docker)
+13. [Executar um Contêiner com Nginx e Mapeando Rotas](#executar-um-contêiner-com-nginx-e-mapeando-rotas)
+14. [Visualizar Logs de um Contêiner](#visualizar-logs-de-um-contêiner)
+15. [Criar uma Nova Imagem a Partir de um Contêiner](#criar-uma-nova-imagem-a-partir-de-um-contêiner)
+16. [Exportar uma Imagem Docker para um Arquivo](#exportar-uma-imagem-docker-para-um-arquivo)
+17. [Importar uma Imagem Docker de um Arquivo](#importar-uma-imagem-docker-de-um-arquivo)
+18. [Executar um Contêiner Interativo e Removível](#executar-um-contêiner-interativo-e-removível)
+19. [Ver Histórico de Modificações de uma Imagem](#ver-histórico-de-modificações-de-uma-imagem)
+20. [Exportar o Sistema de Arquivos de um Contêiner](#exportar-o-sistema-de-arquivos-de-um-contêiner)
+21. [Importar uma Imagem a Partir de um Arquivo TAR](#importar-uma-imagem-a-partir-de-um-arquivo-tar)
+22. [Remover Imagens Não Utilizadas](#remover-imagens-não-utilizadas)
+    - [Observação](#observação)
+23. [Baixar uma Imagem do Docker Hub](#baixar-uma-imagem-do-docker-hub)
+24. [Taggear e Enviar uma Imagem para um Registro](#taggear-e-enviar-uma-imagem-para-um-registro)
+    - [Adicionar uma Tag à Imagem](#adicionar-uma-tag-à-imagem)
+    - [Enviar a Imagem para um Registro](#enviar-a-imagem-para-um-registro)
+25. [Criar uma Imagem Docker com o Editor Vim](#criar-uma-imagem-docker-com-o-editor-vim)
+    - [Código DockerFile](#código-dockerfile)
+    - [Explicação](#explicação)
+    - [Utilidade](#utilidade)
+26. [Construir uma Imagem Docker a Partir de um Dockerfile](#construir-uma-imagem-docker-a-partir-de-um-dockerfile)
+    - [Construir uma Imagem Docker Sem Usar Cache](#construir-uma-imagem-docker-sem-usar-cache)
+27. [Verificar o Uso de Espaço do Docker](#verificar-o-uso-de-espaço-do-docker)
+28. [Obter Informações do Sistema Docker](#obter-informações-do-sistema-docker)
+29. [Limpar Recursos Não Utilizados no Docker](#limpar-recursos-não-utilizados-no-docker)
+
+
 ## Listar Contêineres
 O comando `docker container ls` é usado para listar todos os contêineres em execução no momento. Ele fornece detalhes como o ID do contêiner, a imagem utilizada, status, portas expostas e o nome atribuído ao contêiner.
 ```bash
@@ -116,7 +159,7 @@ No Docker, ao pressionar `Ctrl + P` seguido de `Ctrl + Q` enquanto está dentro 
 
 Isso permite que o contêiner continue rodando em segundo plano, enquanto você retorna ao terminal do sistema host para executar outros comandos.
 
-### Como reconectar ao contêiner:
+### Como reconectar ao contêiner
 
 Se desejar voltar ao terminal interativo do mesmo contêiner, utilize o comando:
 
@@ -385,7 +428,7 @@ Certifique-se de estar autenticado no registro antes de executar este comando. U
 
 O trecho abaixo configura uma imagem Docker baseada na distribuição **Ubuntu** e instala o editor de texto **Vim**.
 
-### Código
+### Código DockerFile
 
 ```dockerfile
 FROM ubuntu
